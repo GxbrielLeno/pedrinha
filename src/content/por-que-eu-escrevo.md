@@ -1,6 +1,7 @@
 ---
 title: "Por que escrevo?"
 date: "20 de Fevereiro, 2026"
+data: 20-02-2026
 thumbnail: "https://i.ibb.co/xrMjFLF/image.png"
 ---
 

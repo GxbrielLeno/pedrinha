@@ -1,6 +1,7 @@
 ---
 title: "O Diniz caiu, mas a minha sanidade foi junto"
 date: "22 de Fevereiro, 2026"
+data: 22-02-2026
 thumbnail: "https://i.ibb.co/gL1ttQrD/image.png"
 ---
 

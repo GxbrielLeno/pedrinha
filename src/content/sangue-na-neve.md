@@ -1,6 +1,7 @@
 ---
-title: "Resenha: Sangue na Neve – A História de um Assassino que Só Queria Ser Amado"
+title: "Resenha: Sangue na Neve (Com Spoilers)"
 date: "26 de Fevereiro, 2026"
+data: 26-02-2026
 thumbnail: "https://i.ibb.co/FbzpDhVp/image.png"
 ---
 *Sangue na Neve*, de Jo Nesbo, não é apenas um romance policial.  

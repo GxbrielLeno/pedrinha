@@ -1,6 +1,7 @@
 ---
 title: "Resenha: Até o Fim do Verão"
 date: "22 de Fevereiro, 2026"
+data: 22-02-2026
 thumbnail: "https://i.ibb.co/0jjn45Dy/image.png"
 ---
 

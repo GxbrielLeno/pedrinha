@@ -13,10 +13,10 @@ import {
 interface Post {
   id: string;
   title: string;
-  date: string;
+  date: string; // O que aparece na tela
   excerpt?: string;
   thumbnail?: string;
-  timestamp: number;
+  timestamp: number; // O que define a ordem
 }
 
 const AdSpace = ({ label, slot }: { label: string; slot?: string }) => {
@@ -48,7 +48,7 @@ const AdSpace = ({ label, slot }: { label: string; slot?: string }) => {
 
 const BlogList: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [limit, setLimit] = useState(3); // LIMITE INICIAL DE POSTS NO FEED
+  const [limit, setLimit] = useState(3);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -58,12 +58,6 @@ const BlogList: React.FC = () => {
           as: "raw",
           eager: true,
         });
-
-        const meses: Record<string, number> = {
-          janeiro: 0, fevereiro: 1, março: 2, marco: 2, abril: 3, maio: 4,
-          junho: 5, julho: 6, agosto: 7, setembro: 8, outubro: 9,
-          novembro: 10, dezembro: 11,
-        };
 
         const postsData = Object.keys(modules).map((path) => {
           const fileContent = modules[path] as string;
@@ -76,38 +70,48 @@ const BlogList: React.FC = () => {
           const getMeta = (name: string) => {
             const regex = new RegExp(`${name}:\\s*(.*)`);
             const match = header.match(regex);
-            return match ? match[1].replace(/^["'](.*)["']$/, "$1").trim() : "";
+            if (!match) return "";
+            return match[1].replace(/^["'](.*)["']$/, "$1").trim();
           };
 
-          const dateStr = getMeta("date") || "01 de Janeiro de 2000";
+          // Lógica das datas:
+          const dateToDisplay = getMeta("date"); // Ex: "26 de Fevereiro, 2026"
+          const dateToSort = getMeta("data");    // Ex: "26-02-2026"
+          
           let timestamp = 0;
 
-          try {
-            const parts = dateStr.toLowerCase().split(" de ");
-            if (parts.length === 3) {
-              const dia = parseInt(parts[0]);
-              const mesNome = parts[1].trim();
-              const ano = parseInt(parts[2]);
-              const mesIndex = meses[mesNome] !== undefined ? meses[mesNome] : 0;
-              
-              // 12:00:00 evita bugs de fuso horário brasileiro
-              timestamp = new Date(ano, mesIndex, dia, 12, 0, 0).getTime();
+          if (dateToSort) {
+            try {
+              // Separa o formato DD-MM-YYYY
+              const parts = dateToSort.split("-");
+              if (parts.length === 3) {
+                const dia = parseInt(parts[0]);
+                const mes = parseInt(parts[1]) - 1; // Meses no JS começam em 0
+                const ano = parseInt(parts[2]);
+                
+                timestamp = new Date(ano, mes, dia, 12, 0, 0).getTime();
+              }
+            } catch (e) {
+              timestamp = 0;
             }
-          } catch (e) {
-            timestamp = 0;
           }
 
           return {
             id,
             title: getMeta("title") || id,
-            date: dateStr,
+            date: dateToDisplay || "Sem data",
             thumbnail: getMeta("thumbnail"),
             excerpt: body.replace(/[#*`>]/g, "").trim().substring(0, 140) + "...",
-            timestamp,
+            timestamp: timestamp || 0,
           };
         });
 
-        setPosts(postsData.sort((a, b) => b.timestamp - a.timestamp));
+        // Ordenação por timestamp (o campo "data" invisível)
+        const sorted = postsData.sort((a, b) => b.timestamp - a.timestamp);
+        setPosts(sorted);
+
+      } catch (err) {
+        console.error("Erro ao carregar posts:", err);
       } finally {
         setLoading(false);
       }
@@ -115,8 +119,7 @@ const BlogList: React.FC = () => {
     loadPosts();
   }, []);
 
-  // Logica de Exibição
-  const featuredPost = useMemo(() => posts[0], [posts]);
+  const featuredPost = useMemo(() => posts[0] || null, [posts]);
   const displayPosts = useMemo(() => posts.slice(1, limit + 1), [posts, limit]);
 
   if (loading) {
@@ -145,7 +148,6 @@ const BlogList: React.FC = () => {
       <main className="max-w-6xl mx-auto px-6 py-12 flex-grow w-full">
         <AdSpace label="Leaderboard Topo" />
 
-        {/* POST EM DESTAQUE (O MAIS RECENTE) */}
         {featuredPost && (
           <section className="mb-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <Link to={`/blog/${featuredPost.id}`} className="group grid lg:grid-cols-2 gap-12 items-center p-8 rounded-[2.5rem] border border-zinc-800/50 bg-zinc-900/10 hover:border-blue-500/30 transition-all duration-500">
@@ -179,7 +181,6 @@ const BlogList: React.FC = () => {
               Feed de Crises
             </h2>
 
-            {/* LISTA DE POSTS COM PAGINAÇÃO */}
             <div className="grid gap-6">
               {displayPosts.map((post) => (
                 <Link key={post.id} to={`/blog/${post.id}`} className="group flex flex-col sm:flex-row gap-8 items-center p-6 rounded-3xl border border-zinc-800/60 bg-zinc-900/20 hover:bg-zinc-800/40 hover:border-blue-500/50 hover:shadow-[0_0_40px_-15px_rgba(59,130,246,0.15)] transition-all duration-300">
@@ -199,7 +200,6 @@ const BlogList: React.FC = () => {
               ))}
             </div>
 
-            {/* BOTÃO VER MAIS (SÓ APARECE SE TIVER MAIS POSTS) */}
             {posts.length > limit + 1 && (
               <button
                 onClick={() => setLimit((prev) => prev + 4)}
@@ -209,10 +209,6 @@ const BlogList: React.FC = () => {
                 <ChevronDown size={18} className="group-hover:translate-y-1 transition-transform" />
               </button>
             )}
-
-            <div className="mt-12">
-              <AdSpace label="In-feed Ad" />
-            </div>
           </div>
 
           <aside className="lg:col-span-4 space-y-8">
@@ -225,20 +221,6 @@ const BlogList: React.FC = () => {
           </aside>
         </div>
       </main>
-
-      <footer className="border-t border-zinc-800/50 bg-[#09090b] py-16">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
-          <div className="font-black text-xl italic uppercase tracking-tighter">Cala Boca Gabs<span className="text-blue-500">_</span></div>
-          <div className="text-zinc-600 font-mono text-[10px] uppercase tracking-widest">
-            © {new Date().getFullYear()} — Desenvolvido em meio a crises.
-          </div>
-          <div className="flex gap-4">
-            <a href="/" target="_blank" rel="noopener noreferrer" className="p-3 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-blue-500 transition-all text-zinc-400 hover:text-blue-400">
-               <ExternalLink size={18} />
-            </a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

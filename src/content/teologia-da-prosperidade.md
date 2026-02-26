@@ -1,6 +1,7 @@
 ---
 title: "O Lado Obscuro da Teologia da Prosperidade: Uma Análise Crítica"
 date: "23 de Fevereiro, 2026"
+data: 23-02-2026
 thumbnail: "https://iili.io/qKTOyru.png"
 ---
 
