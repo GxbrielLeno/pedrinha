@@ -1,0 +1,246 @@
+import React, { useEffect, useState, useMemo } from "react";
+import { Link } from "react-router-dom";
+import {
+  LayoutGrid,
+  ArrowRight,
+  Image as ImageIcon,
+  ChevronDown,
+  Loader2,
+  Megaphone,
+  ExternalLink,
+} from "lucide-react";
+
+interface Post {
+  id: string;
+  title: string;
+  date: string;
+  excerpt?: string;
+  thumbnail?: string;
+  timestamp: number;
+}
+
+const AdSpace = ({ label, slot }: { label: string; slot?: string }) => {
+  useEffect(() => {
+    try {
+      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+    } catch (e) {
+      console.error("AdSense error:", e);
+    }
+  }, []);
+
+  return (
+    <div className="w-full bg-zinc-900/40 border border-dashed border-zinc-800 flex flex-col items-center justify-center p-8 my-8 group hover:border-blue-500/30 transition-colors overflow-hidden">
+      <div className="flex items-center gap-2 text-zinc-600 group-hover:text-blue-500/50 transition-colors mb-4">
+        <Megaphone size={16} />
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em]">{label}</span>
+      </div>
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block" }}
+        data-ad-client="ca-pub-1778551508030340"
+        data-ad-slot={slot || "7408830388"}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+    </div>
+  );
+};
+
+const BlogList: React.FC = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [limit, setLimit] = useState(3); // LIMITE INICIAL DE POSTS NO FEED
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        const modules = import.meta.glob("../content/*.md", {
+          as: "raw",
+          eager: true,
+        });
+
+        const meses: Record<string, number> = {
+          janeiro: 0, fevereiro: 1, março: 2, marco: 2, abril: 3, maio: 4,
+          junho: 5, julho: 6, agosto: 7, setembro: 8, outubro: 9,
+          novembro: 10, dezembro: 11,
+        };
+
+        const postsData = Object.keys(modules).map((path) => {
+          const fileContent = modules[path] as string;
+          const id = path.split("/").pop()?.replace(".md", "") || "";
+          
+          const headerMatch = fileContent.match(/---([\s\S]*?)---/);
+          const header = headerMatch ? headerMatch[1] : "";
+          const body = fileContent.split("---")[2] || "";
+
+          const getMeta = (name: string) => {
+            const regex = new RegExp(`${name}:\\s*(.*)`);
+            const match = header.match(regex);
+            return match ? match[1].replace(/^["'](.*)["']$/, "$1").trim() : "";
+          };
+
+          const dateStr = getMeta("date") || "01 de Janeiro de 2000";
+          let timestamp = 0;
+
+          try {
+            const parts = dateStr.toLowerCase().split(" de ");
+            if (parts.length === 3) {
+              const dia = parseInt(parts[0]);
+              const mesNome = parts[1].trim();
+              const ano = parseInt(parts[2]);
+              const mesIndex = meses[mesNome] !== undefined ? meses[mesNome] : 0;
+              
+              // 12:00:00 evita bugs de fuso horário brasileiro
+              timestamp = new Date(ano, mesIndex, dia, 12, 0, 0).getTime();
+            }
+          } catch (e) {
+            timestamp = 0;
+          }
+
+          return {
+            id,
+            title: getMeta("title") || id,
+            date: dateStr,
+            thumbnail: getMeta("thumbnail"),
+            excerpt: body.replace(/[#*`>]/g, "").trim().substring(0, 140) + "...",
+            timestamp,
+          };
+        });
+
+        setPosts(postsData.sort((a, b) => b.timestamp - a.timestamp));
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadPosts();
+  }, []);
+
+  // Logica de Exibição
+  const featuredPost = useMemo(() => posts[0], [posts]);
+  const displayPosts = useMemo(() => posts.slice(1, limit + 1), [posts, limit]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#121214] flex items-center justify-center">
+        <Loader2 className="text-blue-500 animate-spin" size={40} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-[#09090b] text-zinc-100 font-sans selection:bg-blue-500/30 flex flex-col antialiased">
+      <nav className="border-b border-zinc-800/50 bg-[#09090b]/80 backdrop-blur-xl sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+          <Link to="/blog" className="font-black text-2xl italic tracking-tighter hover:text-blue-400 transition-all uppercase group">
+            Cala Boca Gabs<span className="text-blue-500 group-hover:animate-pulse">_</span>
+          </Link>
+          <div className="hidden md:flex flex-col items-end">
+            <span className="text-[10px] font-mono text-blue-500 uppercase px-3 py-1 bg-blue-500/10 rounded-full border border-blue-500/20">
+              {posts.length} Crises Registradas
+            </span>
+          </div>
+        </div>
+      </nav>
+
+      <main className="max-w-6xl mx-auto px-6 py-12 flex-grow w-full">
+        <AdSpace label="Leaderboard Topo" />
+
+        {/* POST EM DESTAQUE (O MAIS RECENTE) */}
+        {featuredPost && (
+          <section className="mb-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <Link to={`/blog/${featuredPost.id}`} className="group grid lg:grid-cols-2 gap-12 items-center p-8 rounded-[2.5rem] border border-zinc-800/50 bg-zinc-900/10 hover:border-blue-500/30 transition-all duration-500">
+              <div className="relative aspect-video rounded-[1.5rem] overflow-hidden border border-zinc-800 bg-zinc-900 shadow-2xl">
+                {featuredPost.thumbnail ? (
+                  <img src={featuredPost.thumbnail} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-blue-600/10 to-transparent flex items-center justify-center text-blue-500/20">
+                    <ImageIcon size={80} />
+                  </div>
+                )}
+              </div>
+              <div className="flex flex-col items-start">
+                <span className="mb-6 px-3 py-1 bg-blue-500 text-white text-[10px] font-black uppercase tracking-tighter rounded">Destaque</span>
+                <h1 className="text-4xl md:text-5xl font-black mb-6 leading-[1.1] group-hover:text-blue-400 transition-colors italic tracking-tighter uppercase">
+                  {featuredPost.title}
+                </h1>
+                <p className="text-lg text-zinc-400 leading-relaxed mb-8">{featuredPost.excerpt}</p>
+                <div className="flex items-center gap-3 font-bold text-blue-500 uppercase text-xs tracking-widest">
+                  Ler Agora <ArrowRight size={16} />
+                </div>
+              </div>
+            </Link>
+          </section>
+        )}
+
+        <div className="grid lg:grid-cols-12 gap-16">
+          <div className="lg:col-span-8">
+            <h2 className="text-2xl font-black mb-10 flex items-center gap-4 italic uppercase tracking-tighter border-b border-zinc-800 pb-4">
+              <LayoutGrid size={22} className="text-blue-500" />
+              Feed de Crises
+            </h2>
+
+            {/* LISTA DE POSTS COM PAGINAÇÃO */}
+            <div className="grid gap-6">
+              {displayPosts.map((post) => (
+                <Link key={post.id} to={`/blog/${post.id}`} className="group flex flex-col sm:flex-row gap-8 items-center p-6 rounded-3xl border border-zinc-800/60 bg-zinc-900/20 hover:bg-zinc-800/40 hover:border-blue-500/50 hover:shadow-[0_0_40px_-15px_rgba(59,130,246,0.15)] transition-all duration-300">
+                  <div className="w-full sm:w-52 aspect-[16/10] rounded-2xl overflow-hidden border border-zinc-700/30 bg-zinc-900 flex-shrink-0">
+                    {post.thumbnail ? (
+                      <img src={post.thumbnail} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center opacity-20"><ImageIcon /></div>
+                    )}
+                  </div>
+                  <div className="flex-1 space-y-3">
+                    <span className="text-blue-400 text-[10px] font-bold tracking-widest uppercase">{post.date}</span>
+                    <h3 className="text-xl font-bold group-hover:text-blue-400 transition-colors uppercase italic tracking-tighter">{post.title}</h3>
+                    <p className="text-sm text-zinc-500 line-clamp-2">{post.excerpt}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* BOTÃO VER MAIS (SÓ APARECE SE TIVER MAIS POSTS) */}
+            {posts.length > limit + 1 && (
+              <button
+                onClick={() => setLimit((prev) => prev + 4)}
+                className="mt-12 w-full flex items-center justify-center gap-3 py-6 rounded-2xl font-black text-xs uppercase tracking-[0.3em] transition-all border border-zinc-800 hover:border-blue-500 hover:text-blue-400 bg-zinc-900/30 group"
+              >
+                Ver mais crises
+                <ChevronDown size={18} className="group-hover:translate-y-1 transition-transform" />
+              </button>
+            )}
+
+            <div className="mt-12">
+              <AdSpace label="In-feed Ad" />
+            </div>
+          </div>
+
+          <aside className="lg:col-span-4 space-y-8">
+            <div className="p-8 rounded-[2.5rem] border bg-[#121214] border-zinc-800 sticky top-32">
+              <h3 className="text-lg font-black mb-4 italic uppercase tracking-tighter border-b border-zinc-800 pb-4">Manifesto<span className="text-blue-500">_</span></h3>
+              <p className="text-sm text-zinc-400 leading-relaxed italic">
+                Onde eu falo o que ninguém perguntou sobre tecnologia, design, Vasco e outras crises existenciais.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </main>
+
+      <footer className="border-t border-zinc-800/50 bg-[#09090b] py-16">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+          <div className="font-black text-xl italic uppercase tracking-tighter">Cala Boca Gabs<span className="text-blue-500">_</span></div>
+          <div className="text-zinc-600 font-mono text-[10px] uppercase tracking-widest">
+            © {new Date().getFullYear()} — Desenvolvido em meio a crises.
+          </div>
+          <div className="flex gap-4">
+            <a href="/" target="_blank" rel="noopener noreferrer" className="p-3 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-blue-500 transition-all text-zinc-400 hover:text-blue-400">
+               <ExternalLink size={18} />
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default BlogList;

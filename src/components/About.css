@@ -1,0 +1,54 @@
+#logo-gabriel-leno {
+  max-width: 100%;
+  height: auto;
+}
+
+#img-projeto {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+#aaaaaaaaaaa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#logoo {
+  width: 40px;
+}
+
+footer {
+  display: flex;
+}
+
+@media (max-width: 480px) {
+  #logo-gabriel-leno {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 640px) {
+  #logo-gabriel-leno {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  #img-projeto {
+    width: 90%;
+    height: auto;
+  }
+  
+  #logo-gabriel-leno {
+    width: 240px;
+    height: 240px;
+  }
+  #imagem-projetoos {
+    height: auto;
+    width: auto;
+  }
+}
