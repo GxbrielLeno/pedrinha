@@ -20,6 +20,8 @@ As estampas vibrantes, os personagens estilizados e as cores que gritam são uma
 
 Se a grife fosse europeia e custasse 5 mil euros nas vitrines do Iguatemi, você chamaria de "conceito" ou "vanguarda". Como nasce na quebrada, você chama de feio, brega. 
 
+![PICOTA](https://i.ibb.co/tTzMWCzn/image.png)
+
 ### O "Feio" que Incomoda a Elite
 
 Cultura não é sobre o que é "bonitinho" nos padrões de galeria de arte. Cultura é o que gera sentido, pertencimento e união para um povo. O mandrake de Brasília não veste Cool Cat para te agradar; ele veste para se reconhecer no outro. 
