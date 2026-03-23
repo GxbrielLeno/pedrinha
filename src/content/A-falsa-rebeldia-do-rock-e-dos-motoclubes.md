@@ -20,10 +20,7 @@ Nos Estados Unidos, motoclube não era passeio de domingo. Era coisa séria. Gru
 
 **Era perigoso. Era marginal. Era anti-sistema de verdade.**
 
-Agora olha o Brasil.
-
-Aqui virou desfile.
-
+**Agora olha o Brasil. Aqui virou desfile.**
 É jaqueta de couro limpa, frase pronta, foto posada com a moto… e um monte de regra inventada sobre como você “deve” ser.
 
 Os caras copiaram a estética, mas não têm nem 1% da essência.
@@ -32,40 +29,25 @@ E o mais ridículo: ainda pagam de superiores.
 
 Desmerecem motoboy, entregador, quem usa moto pra trampar todo dia — sendo que esses sim vivem o motociclismo na prática.
 
-O cara roda 3 mil km por mês trabalhando e tem playboy de final de semana achando que é mais “motociclista” porque tem uma moto cara parada na garagem.
+O cara roda 3 mil km por mês trabalhando de motoboy e tem playboy achando que é mais “motociclista” porque tem uma moto cara parada na garagem.
 
 Moto foi feita pra andar, não pra virar troféu de ego.
 
 E não para por aí.
 
-Tem motoclube que cria até divisão de classe por cilindrada.
+Tem motoclube que cria até divisão de classe por cilindrada. Se a sua moto é “só” 300cc, você nem entra. Na prática, é isso: divisão de classe.
 
-Se a sua moto é “só” 300cc, você nem entra.
+Os caras pegaram uma cultura que nasceu pra quebrar hierarquia… e recriaram exatamente a mesma merda que diziam rejeitar. Transformaram rebeldia em status.
 
-Na prática, é isso: divisão de classe.
+E com o rock aconteceu a mesma coisa. O que nasceu como rebeldia virou fantasia. O que era questionamento virou discurso pronto.
 
-Os caras pegaram uma cultura que nasceu pra quebrar hierarquia… e recriaram exatamente a mesma merda que diziam rejeitar.
+E hoje tem uma galera que se diz “raiz”, “conservadora”, “anti mimimi”… mas quando eram novos eram exatamente o tipo de rebelde e arruaceiro que eles criticam hoje.
 
-Transformaram rebeldia em status.
-
-E com o rock aconteceu a mesma coisa.
-
-O que nasceu como rebeldia virou fantasia.
-
-O que era questionamento virou discurso pronto.
-
-E hoje tem uma galera que se diz “raiz”, “conservadora”, “anti mimimi”… mas quando eram novos eram exatamente o tipo de rebelde que eles criticam hoje.
-
-Viraram aquilo que odiavam.
-
-E pior: ficaram chatos pra caralho.
+Viraram aquilo que odiavam. E pior: ficaram chatos pra caralho.
 
 Criaram regra pra tudo.
-
 Se você pensa diferente, é rotulado.
-
 Se você age diferente, tá errado.
-
 Se você vive fora do script deles, você “não entendeu o motociclismo”.
 
 **Engraçado… porque o rock e essa cultura de moto nunca foram sobre seguir regra nenhuma.**
@@ -78,11 +60,7 @@ não é que o motoclube mudou
 é que tem muita gente que não vive nada disso de verdade.
 
 Tem moto pra se sentir alguma coisa.
-
 Ouve rock pra montar identidade.
 
-Mas no fundo?
-
-Só trocaram um sistema por outro.
-
+Mas no fundo? Só trocaram um sistema por outro.
 E continuam obedecendo — só que agora achando que são livres e rebeldes.
