@@ -7,9 +7,8 @@ thumbnail: "https://i.postimg.cc/ZKPprr0p/Chat-GPT-Image-23-de-mar-de-2026-14-37
 
 
 ## Recentemente eu comprei uma Hunter 350.
-[![cats.jpg](https://i.postimg.cc/SKXTK2sH/cats.jpg)](https://postimg.cc/xk2yxdLP)
-
 E como qualquer pessoa que entra nesse mundo, comecei a consumir conteúdo de moto, estrada, motoclube… e junto vem o pacote completo: rock, liberdade, “estilo de vida”.
+[![cats.jpg](https://i.postimg.cc/SKXTK2sH/cats.jpg)](https://postimg.cc/xk2yxdLP)
 
 Só que quanto mais eu vejo, mais eu percebo uma coisa:
 
