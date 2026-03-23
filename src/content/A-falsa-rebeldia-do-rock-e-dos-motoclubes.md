@@ -6,8 +6,12 @@ thumbnail: "https://i.ibb.co/zVtNZmrR/Chat-GPT-Image-23-de-mar-de-2026-14-37-28-
 ---
 
 
-## Recentemente eu comprei uma Hunter 350.
-E como qualquer pessoa que entra nesse mundo, comecei a consumir conteúdo de moto, estrada, motoclube… e junto vem o pacote completo: rock, liberdade, “estilo de vida”.
+## Recentemente eu troquei de moto.
+
+Saí de uma 125 pra uma 350cc. A minha 125 era uma moto do caralho. Nunca me deixou na mão, econômica, fazia tudo que eu precisava.
+Mas foi só pegar uma 350 com mais “cara de moto” que mudou tudo. Mais respeito. Mais elogio. Mais validação.
+**Engraçado como não é sobre o que a moto é — é sobre o que ela aparenta.** E pra entender isso, comecei a consumir conteúdo de moto-estrada e motoclube… e junto vem o pacote completo: rock, liberdade, “estilo de vida”.
+
 [![cats.jpg](https://i.postimg.cc/SKXTK2sH/cats.jpg)](https://postimg.cc/xk2yxdLP)
 
 Só que quanto mais eu vejo, mais eu percebo uma coisa:
