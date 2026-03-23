@@ -2,7 +2,7 @@
 title: "A falsa rebeldia do rock e dos motoclubes"
 date: "23 de Março, 2026"
 data: 23-03-2026
-thumbnail: "https://i.postimg.cc/ZKPprr0p/Chat-GPT-Image-23-de-mar-de-2026-14-37-28-(1).png"
+thumbnail: "https://i.ibb.co/zVtNZmrR/Chat-GPT-Image-23-de-mar-de-2026-14-37-28-1.jpg"
 ---
 
 
