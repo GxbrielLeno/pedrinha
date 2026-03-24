@@ -64,16 +64,7 @@ const Header: React.FC = () => {
                   </button>
                 </li>
               ))}
-              
-              {/* ITEM DO BLOG - SEM BUTTON DENTRO, SÓ O LINK */}
-              <li>
-                <Link
-                  to="/blog"
-                  className={`nav-btn-link ${location.pathname === "/blog" ? "active" : ""}`}
-                >
-                  Blog
-                </Link>
-              </li>
+                      
             </ul>
           </nav>
         </header>
